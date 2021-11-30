@@ -3,4 +3,5 @@
   padding: 70px 0 110px;
   max-width: 600px;
   margin: auto;
+  box-sizing: border-box
 }

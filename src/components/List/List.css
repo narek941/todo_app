@@ -1,3 +1,7 @@
+p{
+    margin: 0;
+    padding: 0;
+}
 .completed_wrapper{
     display: flex;
     align-items: center;
@@ -9,4 +13,11 @@
     line-height: 1.5;
     letter-spacing: 0.00938em;
     cursor: pointer;
+}
+.display_none{
+    display:none;
+}
+.rotate_deg{
+    transition: 0.3s;
+    transform:rotate(180deg)
 }

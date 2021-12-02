@@ -1,28 +1,22 @@
 import React, { useState } from "react";
-import { Header, Form, List } from "./components";
+
+import Header from "./components/Header";
+import Form from "./components/Form";
+import List from "./components/List";
+import { getTodo } from "./assets/utils/TodoData";
+
 import "./App.css";
 
 const App = () => {
-
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Prove everyone that programming is fun", completed: false },
-    { id: 2, text: "Build a beautiful To Do List app", completed: true },
-    { id: 3, text: "Keep it simple", completed: true },
-  ]);
-
-  
+  const [todos, setTodos] = useState(getTodo);
   const addTodo = (todo) => {
-    if (!todo.text.length > 0) {
-      return;
-    }
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
   };
 
-  const completeTodo = (e) => {
-    let id = e.target.value;
+  const completeTodo = (id) => {
     const updatedTodos = todos.map((todo) => {
-      if (todo.id === Number(id)) {
+      if (todo.id === id) {
         todo.completed = !todo.completed;
       }
       return todo;
@@ -31,7 +25,7 @@ const App = () => {
   };
 
   const updateTodo = (todoId, newValue) => {
-    if (newValue.length === 0) {
+    if (newValue.trim().length === 0) {
       return;
     }
     const updatedTodos = todos.map((todo) => {
@@ -44,7 +38,7 @@ const App = () => {
   };
 
   const removeTodo = (id) => {
-    const removeArr = [...todos].filter((todo) => todo.id !== id);
+    const removeArr = todos.filter((todo) => todo.id !== id);
     setTodos(removeArr);
   };
 

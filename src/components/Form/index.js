@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
 import "./Form.css";
 
-const Form = ({addTodo}) => {
+const Form = ({ addTodo }) => {
   const [value, setValue] = useState("");
-  const handleValue =(e)=>  setValue(e.target.value);
-  const handleSubmit = (e) => 
-  {
+  const handleValue = (e) => setValue(e.target.value);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (value.trim().length === 0 ) {
-      alert("Input field must be filled out.")
-      return
+    if (value.trim().length === 0) {
+      alert("Input field must be filled out.");
+      return;
     }
     addTodo({
       id: Math.floor(Math.random() * 10000),
@@ -31,8 +32,7 @@ const Form = ({addTodo}) => {
           onChange={handleValue}
           placeholder="To Do Text"
         />
-        <button 
-        className="add_todo_btn" onClick={handleSubmit}>
+        <button className="add_todo_btn" onClick={handleSubmit}>
           +
         </button>
       </form>
@@ -40,7 +40,7 @@ const Form = ({addTodo}) => {
   );
 };
 Form.propTypes = {
-  addTodo: PropTypes.func
-}
+  addTodo: PropTypes.func,
+};
 
 export default Form;

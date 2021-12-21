@@ -22,21 +22,19 @@ const Form = ({ addTodo }) => {
   };
 
   return (
-    <>
-      <form>
-        <input
-          className="add_todo_input"
-          type="text"
-          name="todo"
-          value={value}
-          onChange={handleValue}
-          placeholder="To Do Text"
-        />
-        <button className="add_todo_btn" onClick={handleSubmit}>
-          +
-        </button>
-      </form>
-    </>
+    <form>
+      <input
+        className="add_todo_input"
+        type="text"
+        name="todo"
+        value={value}
+        onChange={handleValue}
+        placeholder="To Do Text"
+      />
+      <button className="add_todo_btn" onClick={handleSubmit}>
+        +
+      </button>
+    </form>
   );
 };
 Form.propTypes = {

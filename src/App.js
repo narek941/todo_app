@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import List from "./components/List";
 import Form from "./components/Form";
 import Header from "./components/Header";
-import { getTodo } from "./assets/utils/TodoData";
+import { getTodo } from "./utils/TodoData";
 
 import "./App.css";
 

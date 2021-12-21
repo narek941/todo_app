@@ -7,16 +7,16 @@ import ArrowSvg from "../../assets/svg/ArrowSvg";
 import "./List.css";
 
 const List = ({ todos, completeTodo, updateTodo, removeTodo }) => {
-  const [isShowCompleted, setIsShowCompleted] = useState(true);
+  const [isToggleArrow, setIsToggleArrow] = useState(true);
 
-  const doneTodos = [...todos].filter((todo) => todo.completed);
+  const doneTodos = todos.filter((todo) => todo.completed);
 
-  const undoneTodos = [...todos].filter((todo) => !todo.completed);
+  const undoneTodos = todos.filter((todo) => !todo.completed);
 
-  const handleArrow = () => setIsShowCompleted(!isShowCompleted);
+  const handleArrow = () => setIsToggleArrow(!isToggleArrow);
 
-  const renderDoneTodos = () =>
-    doneTodos.map(({ id, text, completed }) => (
+  const renderTodos = (todos) => {
+    return todos.map(({ id, text, completed }) => (
       <Todo
         key={id}
         id={id}
@@ -27,34 +27,22 @@ const List = ({ todos, completeTodo, updateTodo, removeTodo }) => {
         removeTodo={removeTodo}
       />
     ));
+  };
 
-  const renderUndoneTodos = () =>
-    undoneTodos.map(({ id, text, completed }) => (
-      <Todo
-        key={id}
-        id={id}
-        text={text}
-        completed={completed}
-        completeTodo={completeTodo}
-        updateTodo={updateTodo}
-        removeTodo={removeTodo}
-      />
-    ));
+  const isRotateClasses = !isToggleArrow ? "rotate_deg" : "";
 
-  const isRotateClasses = !isShowCompleted ? "rotate_deg" : "";
-
-  const isRenderOrComplated = !isShowCompleted ? "display_none" : "";
+  const isRenderOrComplated = !isToggleArrow ? "display_none" : "";
 
   return (
     <div>
-      {renderUndoneTodos()}
+      {renderTodos(undoneTodos)}
       <div className="completed_wrapper" onClick={handleArrow}>
         <p>Completed</p>
         <div className={isRotateClasses}>
           <ArrowSvg />
         </div>
       </div>
-      <div className={isRenderOrComplated}>{renderDoneTodos()}</div>
+      <div className={isRenderOrComplated}>{renderTodos(doneTodos)}</div>
     </div>
   );
 };

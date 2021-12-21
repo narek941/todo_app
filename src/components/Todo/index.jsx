@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import SaveSvg from "../../assets/svg/SaveSvg";
@@ -23,6 +23,8 @@ const Todo = ({
   const showHandler = (e) => setIsShow(true);
 
   const editHandler = () => setEdit({ id: id, text: text });
+  const textSttleClasses = completed ? "textDecoration text" : "text";
+  const isRender = !isShow ? "display_none" : "";
 
   const textHandler = (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const Todo = ({
   };
   useOnClickOutside(ref, () => setIsShow(false));
 
+  useEffect(() => {}, [edit.id]);
   if (edit.id) {
     return (
       <form className="edit_wrapper">
@@ -49,10 +52,6 @@ const Todo = ({
       </form>
     );
   }
-
-  const textSttleClasses = completed ? "textDecoration text" : "text";
-
-  const isRender = !isShow ? "display_none" : "";
 
   return (
     <div className="wrapper">

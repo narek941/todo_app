@@ -28,9 +28,14 @@ const Todo = ({
 
   const textHandler = (e) => {
     e.preventDefault();
-    updateTodo(id, value);
-    setEdit({ id: null, text: "" });
-    setIsShow(false);
+    if (!value.trim().length) {
+      return;
+    }else{
+      updateTodo(id, value);
+      setEdit({ id: null, text: "" });
+      setIsShow(false);
+    }
+   
   };
   useOnClickOutside(ref, () => setIsShow(false));
 

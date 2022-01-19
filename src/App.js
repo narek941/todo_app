@@ -1,46 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector,useDispatch } from "react-redux";
 
 import List from "./components/List";
 import Form from "./components/Form";
 import Header from "./components/Header";
-import { getTodo } from "./utils/TodoData";
-
+import {setTodo,setCompleteTodo,setUpdateTodo,setRemoveTodo} from './store/todoSlice';
 import "./App.css";
 
 const App = () => {
-  const [todos, setTodos] = useState(getTodo);
-  const addTodo = (todo) => {
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
-
-  const completeTodo = (id) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  const updateTodo = (todoId, newValue) => {
-    if (newValue.trim().length === 0) {
-      return;
-    }
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === todoId) {
-        todo.text = newValue;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  const removeTodo = (id) => {
-    const removeArr = todos.filter((todo) => todo.id !== id);
-    setTodos(removeArr);
-  };
+  
+  const dispatch = useDispatch();
+  const todos= useSelector(state=> state.todos.todos)
+  const addTodo = todo => dispatch(setTodo(todo));
+  const completeTodo = id => dispatch(setCompleteTodo(id));
+  const updateTodo = (todoId, newValue) => dispatch(setUpdateTodo({todoId, newValue}));
+  const removeTodo = id => dispatch(setRemoveTodo(id));
 
   return (
     <div className="App">
